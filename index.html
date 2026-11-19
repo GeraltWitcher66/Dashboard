@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>داشبورد گزارش مشتریان</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">گ</div>
+      <div>
+        <h1>داشبورد گزارش مشتریان</h1>
+        <p>رتبه‌بندی و تحلیل عملکرد بر اساس خرید ریالی، کارتنی، وزنی و تعداد روزهای خرید</p>
+      </div>
+    </div>
+    <div class="filters">
+      <div class="filter">
+        <label>مرکز توزیع / شعبه</label>
+        <select id="filterBranch"><option value="">همه</option></select>
+      </div>
+      <div class="filter">
+        <label>فروشنده</label>
+        <select id="filterSalesman"><option value="">همه</option></select>
+      </div>
+      <div class="filter">
+        <label>مسیر ویزیت</label>
+        <select id="filterRoute"><option value="">همه</option></select>
+      </div>
+      <button id="btnReset" class="btn-reset">بازنشانی فیلترها</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="kpis" id="kpiRow"></section>
+
+    <section class="charts-grid">
+      <div class="card chart-card wide">
+        <div class="card-head">
+          <h2>۱۰ مشتری برتر — مقایسه خرید ریالی، کارتنی و وزنی</h2>
+          <div class="seg" id="topMetricSeg">
+            <button data-metric="rial" class="active">ریالی</button>
+            <button data-metric="carton">کارتنی</button>
+            <button data-metric="weight">وزنی</button>
+            <button data-metric="days">تعداد روز خرید</button>
+          </div>
+        </div>
+        <div class="chart-body tall"><canvas id="chartTopCustomers"></canvas></div>
+      </div>
+
+      <div class="card chart-card">
+        <div class="card-head"><h2>سهم فروش هر شعبه (ریالی)</h2></div>
+        <div class="chart-body"><canvas id="chartBranchShare"></canvas></div>
+      </div>
+
+      <div class="card chart-card">
+        <div class="card-head"><h2>عملکرد فروشندگان</h2></div>
+        <div class="chart-body"><canvas id="chartSalesmen"></canvas></div>
+      </div>
+
+      <div class="card chart-card">
+        <div class="card-head"><h2>عملکرد مسیرهای ویزیت</h2></div>
+        <div class="chart-body"><canvas id="chartRoutes"></canvas></div>
+      </div>
+
+      <div class="card chart-card">
+        <div class="card-head"><h2>مقايسه تجمیعی شعبه‌ها (نرمال‌شده)</h2></div>
+        <div class="chart-body"><canvas id="chartBranchRadar"></canvas></div>
+      </div>
+    </section>
+
+    <section class="card table-card">
+      <div class="card-head">
+        <h2>جدول رتبه‌بندی مشتریان</h2>
+        <div class="seg" id="rankMetricSeg">
+          <button data-metric="rial" class="active">ریالی</button>
+          <button data-metric="carton">کارتنی</button>
+          <button data-metric="weight">وزنی</button>
+          <button data-metric="days">تعداد روز خرید</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table id="rankTable">
+          <thead>
+            <tr>
+              <th>رتبه</th>
+              <th>کد مشتری</th>
+              <th>نام مشتری</th>
+              <th>نوع واحد</th>
+              <th>شعبه</th>
+              <th>فروشنده</th>
+              <th>مسیر ویزیت</th>
+              <th class="num">خرید ریالی</th>
+              <th class="num">کارتن</th>
+              <th class="num">وزن (کیلوگرم)</th>
+              <th class="num">روزهای خرید</th>
+              <th>تاریخ افتتاح</th>
+              <th>آخرین خرید</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="footer">داده‌ها نمونه هستند — برای استفاده واقعی فایل <code>data.js</code> را جایگزین کنید</footer>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
